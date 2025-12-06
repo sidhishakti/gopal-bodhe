@@ -14,11 +14,12 @@ const SITE_CONFIG = {
 // Author meta for structured data & reuse
 const AUTHOR = {
   name: "Gopal Bodhe",
-  tagline: "Author of engaging, insightful and thought-provoking books.",
+  tagline: "Pioneer of aerial photography in India, author and former Indian Navy officer.",
   shortBio:
-    "Shri Gopal Bodhe is an author whose work focuses on lived experience, reflection and practical wisdom. Replace this text with an accurate short bio.",
-  email: "bodheg@gmail.com" // TODO: replace with real email
+    "Gopal Bodhe is a photographer, author and former Indian Navy officer known for pioneering aerial photography in India. He has documented thousands of kilometres of coastline and heritage sites from the air and authored multiple books on Goa, Mumbai, Maharashtra and forts from a bird’s eye view.",
+  email: "bodheg@gmail.com" // if you want to use the real email
 };
+
 
 // ====== BOOK DATA MODEL ======
 // Add/modify books here. This is your single source of truth.
