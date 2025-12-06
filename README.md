@@ -17,8 +17,8 @@ designed to be hosted on **GitHub Pages**.
 
 3. Replace the placeholder images:
    - `assets/images/bodhe-sir.jpg`
-   - `assets/images/books/A_Trade_Rout.jpg`
-   - `assets/images/books/Fort_Book.jpg`
+   - `assets/images/books/a-trade-route.jpg`
+   - `assets/images/books/fort-book.jpg`
    with real photos / book covers (keep the filenames or update paths in JS).
 
 4. Commit and push to GitHub, then enable GitHub Pages from the repository settings.

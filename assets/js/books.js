@@ -45,7 +45,7 @@ const BOOKS = [
     subtitle: "",
     description:
       "Another placeholder entry. Add the real book name, theme, and a short blurb here.",
-    coverImage: "assets/images/books/Fort_Book.jpg",
+    coverImage: "assets/images/books/fort-book.jpg",
     price: 299,
     currency: DEFAULT_CURRENCY,
     isbn: "",
