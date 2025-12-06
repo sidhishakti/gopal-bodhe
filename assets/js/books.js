@@ -1,11 +1,11 @@
 // File: assets/js/books.js
 
 // ====== CONFIG ======
-const WHATSAPP_NUMBER = "968772482824"; // e.g. 919876543210 (country code + number, no +)
+const WHATSAPP_NUMBER = "+919930027257"; // e.g. 919876543210 (country code + number, no +)
 const DEFAULT_CURRENCY = "INR";
 
 const SITE_CONFIG = {
-  whatsappNumber: "968772482824",
+  whatsappNumber: "+919930027257",
   defaultCurrency: "INR",
   instagramUrl: "https://www.instagram.com/siddhishakti_publication?igsh=cmhoY3MxdGtxMmJh"
 };
