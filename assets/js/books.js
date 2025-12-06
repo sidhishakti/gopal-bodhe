@@ -18,12 +18,12 @@ const AUTHOR = {
 const BOOKS = [
   {
     id: 1,
-    title: "Sample Book One",
+    title: "A Trade route",
     slug: "sample-book-one", // used for deep-links (#sample-book-one)
     subtitle: "Replace with real title and subtitle",
     description:
       "This is placeholder text for one of the books by Shri Gopal Bodhe. Replace with a 2–3 line description.",
-    coverImage: "assets/images/books/A_Trade_Rout.jpg",
+    coverImage: "assets/images/books/a-trade-route.jpg",
     price: 399,
     currency: DEFAULT_CURRENCY,
     isbn: "978-1-23456-789-0",
@@ -61,13 +61,13 @@ const BOOKS = [
       "Namaste, I am interested in buying \"Sample Book Two\" by Shri Gopal Bodhe. Please share payment and shipping details."
   },
   {
-    id: 2,
-    title: "Sample Book Two",
+    id: 3,
+    title: "Fort Book",
     slug: "sample-book-two",
     subtitle: "",
     description:
       "Another placeholder entry. Add the real book name, theme, and a short blurb here.",
-    coverImage: "assets/images/books/Fort_Book.jpg",
+    coverImage: "assets/images/books/fort-book.jpg",
     price: 299,
     currency: DEFAULT_CURRENCY,
     isbn: "",
@@ -83,13 +83,13 @@ const BOOKS = [
       "Namaste, I am interested in buying \"Sample Book Two\" by Shri Gopal Bodhe. Please share payment and shipping details."
   },
   {
-    id: 2,
-    title: "Sample Book Two",
+    id: 4,
+    title: "GOA Book",
     slug: "sample-book-two",
     subtitle: "",
     description:
       "Another placeholder entry. Add the real book name, theme, and a short blurb here.",
-    coverImage: "assets/images/books/Fort_Book.jpg",
+    coverImage: "assets/images/books/goa.jpg",
     price: 299,
     currency: DEFAULT_CURRENCY,
     isbn: "",
@@ -105,13 +105,13 @@ const BOOKS = [
       "Namaste, I am interested in buying \"Sample Book Two\" by Shri Gopal Bodhe. Please share payment and shipping details."
   },
   {
-    id: 2,
-    title: "Sample Book Two",
+    id: 5,
+    title: "Lakshadeep",
     slug: "sample-book-two",
     subtitle: "",
     description:
       "Another placeholder entry. Add the real book name, theme, and a short blurb here.",
-    coverImage: "assets/images/books/Fort_Book.jpg",
+    coverImage: "assets/images/books/lakshadeep.jpg",
     price: 299,
     currency: DEFAULT_CURRENCY,
     isbn: "",
@@ -127,13 +127,13 @@ const BOOKS = [
       "Namaste, I am interested in buying \"Sample Book Two\" by Shri Gopal Bodhe. Please share payment and shipping details."
   },
   {
-    id: 2,
-    title: "Sample Book Two",
+    id: 6,
+    title: "Lighthouse",
     slug: "sample-book-two",
     subtitle: "",
     description:
       "Another placeholder entry. Add the real book name, theme, and a short blurb here.",
-    coverImage: "assets/images/books/Fort_Book.jpg",
+    coverImage: "assets/images/books/lighthouse.jpg",
     price: 299,
     currency: DEFAULT_CURRENCY,
     isbn: "",
@@ -149,13 +149,13 @@ const BOOKS = [
       "Namaste, I am interested in buying \"Sample Book Two\" by Shri Gopal Bodhe. Please share payment and shipping details."
   },
   {
-    id: 2,
-    title: "Sample Book Two",
+    id: 7,
+    title: "Maharashtra Book",
     slug: "sample-book-two",
     subtitle: "",
     description:
       "Another placeholder entry. Add the real book name, theme, and a short blurb here.",
-    coverImage: "assets/images/books/Fort_Book.jpg",
+    coverImage: "assets/images/books/maharashtra.jpg",
     price: 299,
     currency: DEFAULT_CURRENCY,
     isbn: "",
@@ -171,13 +171,13 @@ const BOOKS = [
       "Namaste, I am interested in buying \"Sample Book Two\" by Shri Gopal Bodhe. Please share payment and shipping details."
   },
   {
-    id: 2,
-    title: "Sample Book Two",
+    id: 8,
+    title: "Sidhivinayak",
     slug: "sample-book-two",
     subtitle: "",
     description:
       "Another placeholder entry. Add the real book name, theme, and a short blurb here.",
-    coverImage: "assets/images/books/Fort_Book.jpg",
+    coverImage: "assets/images/books/sidhivinayak.jpg",
     price: 299,
     currency: DEFAULT_CURRENCY,
     isbn: "",
@@ -240,14 +240,13 @@ function renderFeaturedBooks() {
           <a href="books.html#${book.slug}" class="btn btn-secondary">
             View Details
           </a>
-          ${
-            book.externalPurchaseLink
-              ? `
+          ${book.externalPurchaseLink
+          ? `
             <a href="${book.externalPurchaseLink}" target="_blank" class="btn btn-outline">
               Buy Online
             </a>`
-              : ""
-          }
+          : ""
+        }
         </div>
       </div>
     </article>
@@ -277,24 +276,22 @@ function renderAllBooks() {
           <div><dt>Format</dt><dd>${book.format || "-"}</dd></div>
           <div><dt>Pages</dt><dd>${book.pages || "-"}</dd></div>
           <div><dt>Language</dt><dd>${book.language || "-"}</dd></div>
-          ${
-            book.price
-              ? `<div><dt>Price</dt><dd>${book.currency} ${book.price}</dd></div>`
-              : ""
-          }
+          ${book.price
+          ? `<div><dt>Price</dt><dd>${book.currency} ${book.price}</dd></div>`
+          : ""
+        }
         </dl>
         <div class="book-actions">
           <a href="${getWhatsAppLinkForBook(book)}" target="_blank" class="btn btn-primary">
             Order via WhatsApp
           </a>
-          ${
-            book.externalPurchaseLink
-              ? `
+          ${book.externalPurchaseLink
+          ? `
             <a href="${book.externalPurchaseLink}" target="_blank" class="btn btn-secondary">
               Buy Online
             </a>`
-              : ""
-          }
+          : ""
+        }
           <a href="${getGlobalWhatsAppLink()}" target="_blank" class="btn btn-outline">
             General Enquiry
           </a>
