@@ -43,7 +43,18 @@
   <header class="header">
     <nav class="nav">
       <div class="nav-logo">Gopal Bodhe</div>
-      <div class="nav-links">
+
+      <!-- Mobile menu button -->
+      <button
+        class="nav-toggle"
+        id="nav-toggle"
+        aria-expanded="false"
+        aria-controls="primary-nav"
+      >
+        Menu
+      </button>
+
+      <div class="nav-links" id="primary-nav">
         <a href="#about">About</a>
         <a href="#featured">Books</a>
         <a href="books.html">All Books</a>
@@ -113,7 +124,7 @@
         <!-- Filled by JS -->
       </div>
     </section>
-
+    <!-- About the author 
     <section class="section" id="about-author">
       <div class="section-header">
         <h2>About the Author</h2>
@@ -157,7 +168,7 @@
       </div>
     </section>
 
-
+->
     <!-- Social proof / testimonials -->
     <section class="section" id="testimonials">
       <div class="section-header">
@@ -267,6 +278,20 @@
       const yearSpan = document.getElementById("year");
       if (yearSpan) {
         yearSpan.textContent = new Date().getFullYear();
+      }
+
+      // Mobile nav toggle
+      const navToggle = document.getElementById("nav-toggle");
+      const navLinks = document.getElementById("primary-nav");
+
+      if (navToggle && navLinks) {
+        // Start collapsed on mobile when JS is available
+        navLinks.classList.add("nav-links--collapsed");
+
+        navToggle.addEventListener("click", function () {
+          const isCollapsed = navLinks.classList.toggle("nav-links--collapsed");
+          navToggle.setAttribute("aria-expanded", String(!isCollapsed));
+        });
       }
     });
   </script>

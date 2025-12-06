@@ -1,9 +1,6 @@
 /* File: assets/css/style.css */
 
-/* ===========
-   Global reset
-   =========== */
-
+/* Global reset-ish */
 * {
   box-sizing: border-box;
 }
@@ -26,10 +23,7 @@ img {
   display: block;
 }
 
-
-/* ===========
-   Layout / Header / Nav
-   =========== */
+/* Layout */
 
 .header {
   background: #111827;
@@ -51,7 +45,6 @@ img {
   letter-spacing: 0.05em;
 }
 
-/* Desktop nav links */
 .nav-links a {
   margin-left: 1.5rem;
   font-size: 0.95rem;
@@ -68,10 +61,7 @@ main {
   padding: 2rem 1rem 4rem;
 }
 
-
-/* ===========
-   Hero
-   =========== */
+/* Hero */
 
 .hero {
   display: grid;
@@ -103,10 +93,7 @@ main {
   gap: 0.75rem;
 }
 
-
-/* ===========
-   Buttons
-   =========== */
+/* Buttons */
 
 .btn {
   display: inline-flex;
@@ -148,10 +135,7 @@ main {
   background: #f3f4f6;
 }
 
-
-/* ===========
-   Sections
-   =========== */
+/* Sections */
 
 .section {
   margin-bottom: 3rem;
@@ -175,10 +159,7 @@ main {
   font-size: 0.95rem;
 }
 
-
-/* ===========
-   Book cards
-   =========== */
+/* Book cards */
 
 .book-grid {
   display: grid;
@@ -226,7 +207,7 @@ main {
   color: #6b7280;
 }
 
-.book-meta span + span::before {
+.book-meta span+span::before {
   content: "·";
   margin: 0 0.3rem;
 }
@@ -242,10 +223,7 @@ main {
   gap: 0.5rem;
 }
 
-
-/* ===========
-   Book details (books.html)
-   =========== */
+/* Book details on books.html */
 
 .book-details {
   display: grid;
@@ -265,10 +243,7 @@ main {
   color: #111827;
 }
 
-
-/* ===========
-   Testimonials
-   =========== */
+/* Testimonials */
 
 .testimonials {
   display: grid;
@@ -299,10 +274,7 @@ main {
   color: #6b7280;
 }
 
-
-/* ===========
-   Contact
-   =========== */
+/* Contact */
 
 .contact-grid {
   display: grid;
@@ -336,14 +308,11 @@ main {
   font-size: 0.9rem;
 }
 
-.contact-list li + li {
+.contact-list li+li {
   margin-top: 0.4rem;
 }
 
-
-/* ===========
-   Footer
-   =========== */
+/* Footer */
 
 .footer {
   background: #111827;
@@ -361,10 +330,7 @@ main {
   align-items: center;
 }
 
-
-/* ===========
-   Floating WhatsApp
-   =========== */
+/* Floating WhatsApp */
 
 #floating-whatsapp {
   position: fixed;
@@ -386,15 +352,7 @@ main {
   font-weight: 600;
 }
 
-/* Hide mobile menu toggle on desktop */
-.nav-toggle {
-  display: none;
-}
-
-
-/* ===========
-   Responsive
-   =========== */
+/* Responsive */
 
 @media (max-width: 768px) {
   .hero {
@@ -409,48 +367,54 @@ main {
     grid-template-columns: 1fr;
   }
 
-  /* Ensure nav wrapper can hold dropdown */
-  .nav {
-    position: relative;
-  }
-
-  /* Mobile menu button (kept visible as-is; no desktop rule added) */
-  .nav-toggle {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.4rem 0.75rem;
-    font-size: 0.9rem;
-    border-radius: 999px;
-    border: 1px solid #ccc;
-    background: #fff;
-    cursor: pointer;
-  }
-
-  /* Mobile dropdown nav */
-  .nav-links {
-    position: absolute;
-    right: 1rem;
-    top: 3.5rem; /* adjust based on header height if needed */
-    background: #ffffff;
-    border-radius: 0.5rem;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-    padding: 0.75rem 1rem;
-    flex-direction: column;
-    gap: 0.5rem;
-    min-width: 160px;
-
-    /* Visible by default if JS is off */
+  /* Base nav layout (desktop) – keep or adapt to your current styles */
+  .navbar {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
-  /* Hidden state (JS toggles this class) */
-  .nav-links.nav-links--collapsed {
-    display: none;
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
   }
 
-  /* Reset desktop horizontal spacing when vertical on mobile */
-  .nav-links a {
-    margin-left: 0;
+  /* Mobile styles */
+  @media (max-width: 768px) {
+    .nav-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.4rem 0.75rem;
+      font-size: 0.9rem;
+      border-radius: 999px;
+      border: 1px solid #ccc;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .nav-links {
+      position: absolute;
+      right: 1rem;
+      top: 3.5rem;
+      /* adjust based on your header height */
+      background: #ffffff;
+      border-radius: 0.5rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      padding: 0.75rem 1rem;
+      flex-direction: column;
+      gap: 0.5rem;
+      min-width: 160px;
+
+      /* important: visible by default if JS is off */
+      display: flex;
+    }
+
+    /* When not open (JS adds/removes this), hide visually but keep semantics ok-ish */
+    .nav-links.nav-links--collapsed {
+      display: none;
+    }
   }
+
 }
