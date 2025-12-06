@@ -23,7 +23,19 @@
   <header class="header">
     <nav class="nav">
       <div class="nav-logo">Gopal Bodhe</div>
-      <div class="nav-links">
+
+      <!-- Mobile menu button -->
+      <button
+        class="nav-toggle"
+        id="nav-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="primary-nav"
+      >
+        Menu
+      </button>
+
+      <div class="nav-links" id="primary-nav">
         <a href="#" data-instagram-link="true" target="_blank">Instagram</a>
         <a href="index.html#about">About</a>
         <a href="index.html#featured">Featured</a>
@@ -62,15 +74,8 @@
     </div>
   </footer>
 
-  <script src="assets/js/books.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const yearSpan = document.getElementById("year");
-      if (yearSpan) {
-        yearSpan.textContent = new Date().getFullYear();
-      }
-    });
-  </script>
+  <script src="assets/js/books.js" defer></script>
+  <script src="assets/js/nav.js" defer></script>
 </body>
 
 </html>

@@ -268,33 +268,8 @@
     </div>
   </footer>
 
-  <script src="assets/js/books.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const mainBtn = document.getElementById("whatsapp-contact-main");
-      if (mainBtn && typeof getGlobalWhatsAppLink === "function") {
-        mainBtn.href = getGlobalWhatsAppLink();
-      }
-      const yearSpan = document.getElementById("year");
-      if (yearSpan) {
-        yearSpan.textContent = new Date().getFullYear();
-      }
-
-      // Mobile nav toggle
-      const navToggle = document.getElementById("nav-toggle");
-      const navLinks = document.getElementById("primary-nav");
-
-      if (navToggle && navLinks) {
-        // Start collapsed on mobile when JS is available
-        navLinks.classList.add("nav-links--collapsed");
-
-        navToggle.addEventListener("click", function () {
-          const isCollapsed = navLinks.classList.toggle("nav-links--collapsed");
-          navToggle.setAttribute("aria-expanded", String(!isCollapsed));
-        });
-      }
-    });
-  </script>
+  <script src="assets/js/books.js" defer></script>
+  <script src="assets/js/nav.js" defer></script>
 </body>
 
 </html>

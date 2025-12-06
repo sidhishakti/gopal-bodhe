@@ -365,27 +365,36 @@ function injectAuthorStructuredData() {
 // ====== BOOTSTRAP ======
 
 document.addEventListener("DOMContentLoaded", () => {
-  // --- Existing site setup ---
-  renderFeaturedBooks();
-  renderAllBooks();
-  setupFloatingWhatsApp();
-  setupInstagramLinks();
-  injectAuthorStructuredData();
-
-  // --- Mobile Nav Setup ---
-  const toggleButton = document.getElementById("nav-toggle");
-  const navLinks = document.getElementById("primary-nav"); // Ensure correct ID
-
-  // If nav doesn't exist on this page, skip
-  if (!toggleButton || !navLinks) return;
-
-  // Collapse menu *only on mobile*
-  if (window.matchMedia("(max-width: 768px)").matches) {
-    navLinks.classList.add("nav-links--collapsed");
+  // --- Site content setup ---
+  if (typeof renderFeaturedBooks === "function") {
+    renderFeaturedBooks();
   }
 
-  toggleButton.addEventListener("click", () => {
-    const isCollapsed = navLinks.classList.toggle("nav-links--collapsed");
-    toggleButton.setAttribute("aria-expanded", String(!isCollapsed));
-  });
+  if (typeof renderAllBooks === "function") {
+    renderAllBooks();
+  }
+
+  if (typeof setupFloatingWhatsApp === "function") {
+    setupFloatingWhatsApp();
+  }
+
+  if (typeof setupInstagramLinks === "function") {
+    setupInstagramLinks();
+  }
+
+  if (typeof injectAuthorStructuredData === "function") {
+    injectAuthorStructuredData();
+  }
+
+  // Wire main WhatsApp button (if present)
+  const mainBtn = document.getElementById("whatsapp-contact-main");
+  if (mainBtn && typeof getGlobalWhatsAppLink === "function") {
+    mainBtn.href = getGlobalWhatsAppLink();
+  }
+
+  // Footer year
+  const yearSpan = document.getElementById("year");
+  if (yearSpan) {
+    yearSpan.textContent = new Date().getFullYear();
+  }
 });
