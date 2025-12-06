@@ -10,8 +10,12 @@ const SITE_CONFIG = {
   defaultCurrency: "INR",
 
   // Instagram profile URL
-  instagramUrl: "https://www.instagram.com/siddhishakti_publication?igsh=cmhoY3MxdGtxMmJh"
+  instagramUrl: "https://www.instagram.com/siddhishakti_publication?igsh=cmhoY3MxdGtxMmJh",
+
+  // Facebook page URL
+  facebookUrl: "https://www.facebook.com/your-page-here"
 };
+
 
 // Backwards-compatible constants (if any code still uses them)
 const WHATSAPP_NUMBER = SITE_CONFIG.whatsappNumber;
@@ -330,11 +334,33 @@ function renderAllBooks() {
 }
 
 // Floating WhatsApp button
-function setupFloatingWhatsApp() {
-  const btn = document.getElementById("floating-whatsapp");
-  if (!btn) return;
-  btn.href = getGlobalWhatsAppLink();
+// Floating social icons (WhatsApp, Instagram, Facebook)
+function setupFloatingSocialIcons() {
+  const whatsappBtn = document.getElementById("floating-whatsapp");
+  const instagramBtn = document.getElementById("floating-instagram");
+  const facebookBtn = document.getElementById("floating-facebook");
+
+  // WhatsApp
+  if (whatsappBtn && typeof getGlobalWhatsAppLink === "function") {
+    whatsappBtn.href = getGlobalWhatsAppLink();
+  }
+
+  // Instagram
+  if (instagramBtn && SITE_CONFIG.instagramUrl) {
+    instagramBtn.href = SITE_CONFIG.instagramUrl;
+  }
+
+  // Facebook
+  if (facebookBtn && SITE_CONFIG.facebookUrl) {
+    facebookBtn.href = SITE_CONFIG.facebookUrl;
+  }
 }
+
+// Backwards compatibility shim (older code may still call this)
+function setupFloatingWhatsApp() {
+  setupFloatingSocialIcons();
+}
+
 
 // Instagram links (header/footer)
 function setupInstagramLinks() {
@@ -342,6 +368,15 @@ function setupInstagramLinks() {
   const links = document.querySelectorAll('[data-instagram-link="true"]');
   links.forEach((el) => {
     el.href = SITE_CONFIG.instagramUrl;
+  });
+}
+
+// Instagram links (header/footer)
+function setupInstagramLinks() {
+  if (!SITE_CONFIG.facebookUrl) return;
+  const links = document.querySelectorAll('[data-facebook-link="true"]');
+  links.forEach((el) => {
+    el.href = SITE_CONFIG.facebookUrl;
   });
 }
 
@@ -374,10 +409,15 @@ document.addEventListener("DOMContentLoaded", () => {
     renderAllBooks();
   }
 
-  if (typeof setupFloatingWhatsApp === "function") {
+  // Floating social icons
+  if (typeof setupFloatingSocialIcons === "function") {
+    setupFloatingSocialIcons();
+  } else if (typeof setupFloatingWhatsApp === "function") {
+    // fallback if only the old function exists
     setupFloatingWhatsApp();
   }
 
+  // Header/footer Instagram links
   if (typeof setupInstagramLinks === "function") {
     setupInstagramLinks();
   }

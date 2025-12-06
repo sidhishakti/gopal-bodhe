@@ -226,7 +226,7 @@ main {
   color: #6b7280;
 }
 
-.book-meta span + span::before {
+.book-meta span+span::before {
   content: "·";
   margin: 0 0.3rem;
 }
@@ -336,7 +336,7 @@ main {
   font-size: 0.9rem;
 }
 
-.contact-list li + li {
+.contact-list li+li {
   margin-top: 0.4rem;
 }
 
@@ -364,7 +364,7 @@ main {
 
 /* ===========
    Floating WhatsApp
-   =========== */
+   =========== 
 
 #floating-whatsapp {
   position: fixed;
@@ -384,7 +384,64 @@ main {
 
 #floating-whatsapp span {
   font-weight: 600;
+} */
+
+/* Floating social icons: WhatsApp, Instagram, Facebook */
+.floating-social {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  z-index: 50;
 }
+
+.floating-social__btn {
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 10px 15px rgba(15, 23, 42, 0.3);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+}
+
+/* Brand-ish colors */
+.floating-social__btn--whatsapp {
+  background: #25d366;
+}
+
+.floating-social__btn--instagram {
+  background: #000000;
+}
+
+.floating-social__btn--facebook {
+  background: #1877f2;
+}
+
+.floating-social__btn svg {
+  width: 26px;
+  height: 26px;
+}
+
+.floating-social__btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 25px rgba(15, 23, 42, 0.35);
+}
+
+/* On very small screens, line them up horizontally */
+@media (max-width: 480px) {
+  .floating-social {
+    flex-direction: row;
+    bottom: 16px;
+    right: 16px;
+  }
+}
+
+
 
 /* Hide mobile menu toggle on desktop */
 .nav-toggle {
@@ -414,7 +471,6 @@ main {
     position: relative;
   }
 
-  /* Mobile menu button (kept visible as-is; no desktop rule added) */
   .nav-toggle {
     display: inline-flex;
     align-items: center;
@@ -431,7 +487,8 @@ main {
   .nav-links {
     position: absolute;
     right: 1rem;
-    top: 3.5rem; /* adjust based on header height if needed */
+    top: 3.5rem;
+    /* adjust based on header height if needed */
     background: #ffffff;
     border-radius: 0.5rem;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
@@ -442,6 +499,9 @@ main {
 
     /* Visible by default if JS is off */
     display: flex;
+
+    /* NEW: ensure dark text inside dropdown */
+    color: #111827;
   }
 
   /* Hidden state (JS toggles this class) */
@@ -449,8 +509,49 @@ main {
     display: none;
   }
 
-  /* Reset desktop horizontal spacing when vertical on mobile */
+  /* Reset desktop horizontal spacing when vertical on mobile
+     and force dark link color for contrast */
   .nav-links a {
     margin-left: 0;
+    color: #111827;
   }
+}
+
+/* ======================================================
+   Social Buttons — Facebook + Instagram
+====================================================== */
+
+.social-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.social-btn {
+  background: #ffffff;
+  border-radius: 0.75rem;
+  padding: 0.6rem 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  border: 2px solid #000;
+  transition: all 0.2s ease-in-out;
+}
+
+.social-btn svg {
+  display: block;
+}
+
+.social-btn:hover {
+  transform: translateY(-3px);
+  background: #000;
+}
+
+.social-btn:hover svg path,
+.social-btn:hover svg circle,
+.social-btn:hover svg rect {
+  stroke: #fff !important;
+  fill: #fff !important;
 }
