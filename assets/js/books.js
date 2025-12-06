@@ -4,6 +4,13 @@
 const WHATSAPP_NUMBER = "968772482824"; // e.g. 919876543210 (country code + number, no +)
 const DEFAULT_CURRENCY = "INR";
 
+const SITE_CONFIG = {
+  whatsappNumber: "968772482824",
+  defaultCurrency: "INR",
+  instagramUrl: "https://www.instagram.com/siddhishakti_publication?igsh=cmhoY3MxdGtxMmJh"
+};
+
+
 // Author meta for structured data & reuse
 const AUTHOR = {
   name: "Gopal Bodhe",
@@ -321,14 +328,25 @@ function injectAuthorStructuredData() {
     description: AUTHOR.shortBio,
     jobTitle: "Author",
     email: AUTHOR.email,
-    url: window.location.origin
+    url: window.location.origin,
+    sameAs: SITE_CONFIG.instagramUrl ? [SITE_CONFIG.instagramUrl] : []
   });
   document.head.appendChild(script);
 }
+
+function setupInstagramLinks() {
+  if (!SITE_CONFIG.instagramUrl) return;
+  const links = document.querySelectorAll('[data-instagram-link="true"]');
+  links.forEach((el) => {
+    el.href = SITE_CONFIG.instagramUrl;
+  });
+}
+
 
 document.addEventListener("DOMContentLoaded", () => {
   renderFeaturedBooks();
   renderAllBooks();
   setupFloatingWhatsApp();
+  setupInstagramLinks(); 
   injectAuthorStructuredData();
 });
