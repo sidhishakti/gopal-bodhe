@@ -21,6 +21,11 @@ const SITE_CONFIG = {
 const WHATSAPP_NUMBER = SITE_CONFIG.whatsappNumber;
 const DEFAULT_CURRENCY = SITE_CONFIG.defaultCurrency;
 
+// wa.me expects digits only (no leading '+'). We keep config flexible and sanitize at runtime.
+function normalizeWhatsAppNumber(num) {
+  return String(num || "").trim().replace(/^\+/, "");
+}
+
 // ====== AUTHOR METADATA ======
 const AUTHOR = {
   name: "Gopal Bodhe",
@@ -218,7 +223,7 @@ const BOOKS = [
 // ====== HELPERS ======
 
 function getWhatsAppLinkForBook(book) {
-  const base = `https://wa.me/${WHATSAPP_NUMBER}`;
+  const base = `https://wa.me/${normalizeWhatsAppNumber(WHATSAPP_NUMBER)}`;
   const text =
     book.whatsappMessageTemplate ||
     `Namaste, I would like to order the book "${book.title}" by Shri Gopal Bodhe. Please share payment and shipping details.`;
@@ -226,9 +231,45 @@ function getWhatsAppLinkForBook(book) {
 }
 
 function getGlobalWhatsAppLink() {
-  const base = `https://wa.me/${WHATSAPP_NUMBER}`;
+  const base = `https://wa.me/${normalizeWhatsAppNumber(WHATSAPP_NUMBER)}`;
   const text = "Namaste, I am interested in the books of Shri Gopal Bodhe.";
   return `${base}?text=${encodeURIComponent(text)}`;
+}
+
+// ====== CATALOG FILTERS + SEARCH (books.html) ======
+
+function normalizeTag(tag) {
+  return String(tag || "")
+    .trim()
+    .toLowerCase();
+}
+
+function getAllTags(books) {
+  const map = new Map(); // normalized -> display
+  books.forEach((b) => {
+    const tags = Array.isArray(b.tags) ? b.tags : (b.tags ? [b.tags] : []);
+    tags.forEach((t) => {
+      const n = normalizeTag(t);
+      if (!n) return;
+      if (!map.has(n)) map.set(n, String(t).trim());
+    });
+  });
+  return Array.from(map.entries())
+    .map(([norm, display]) => ({ norm, display }))
+    .sort((a, b) => a.display.localeCompare(b.display));
+}
+
+function matchesSearch(book, q) {
+  if (!q) return true;
+  const tags = Array.isArray(book.tags) ? book.tags : (book.tags ? [book.tags] : []);
+  const hay = `${book.title || ""} ${book.subtitle || ""} ${book.description || ""} ${tags.join(" ")}`.toLowerCase();
+  return hay.includes(q);
+}
+
+function matchesTag(book, activeTagNorm) {
+  if (!activeTagNorm || activeTagNorm === "all") return true;
+  const tags = Array.isArray(book.tags) ? book.tags : (book.tags ? [book.tags] : []);
+  return tags.map(normalizeTag).includes(activeTagNorm);
 }
 
 // Unified card renderer so we don’t duplicate HTML in two functions
@@ -239,7 +280,8 @@ function renderBookCard(book, { featured = false } = {}) {
     ? `<p class="book-subtitle">${book.subtitle}</p>`
     : "";
   const priceHtml = hasPrice
-    ? `<p class="book-price">${currency} ${book.price}</p>`
+    //? `<p class="book-price">${currency} ${book.price}</p>`
+    ? `<p class="book-price">Book Price On Request</p>`
     : "";
 
   const metaHtml = `
@@ -327,10 +369,92 @@ function renderAllBooks() {
   const container = document.getElementById("all-books");
   if (!container) return;
 
+  const filtersEl = document.getElementById("book-filters");
+  const searchEl = document.getElementById("book-search-input");
+
   const activeBooks = BOOKS.filter((b) => b.isActive);
-  container.innerHTML = activeBooks
-    .map((book) => renderBookCard(book, { featured: false }))
-    .join("");
+
+  // If the page doesn't have filter/search controls, just render the list (backwards compatible)
+  if (!filtersEl && !searchEl) {
+    container.innerHTML = activeBooks
+      .map((book) => renderBookCard(book, { featured: false }))
+      .join("");
+    return;
+  }
+
+  // State
+  let activeTag = "all"; // normalized tag or "all"
+  let searchQ = "";
+
+  // Build filter buttons: required quick filters + any tags present in data
+  const quickFilters = [
+    { norm: "all", display: "All" },
+    { norm: normalizeTag("Coastline"), display: "Coastline" },
+    { norm: normalizeTag("Forts & Heritage"), display: "Forts & Heritage" },
+    { norm: normalizeTag("Cities"), display: "Cities" },
+    { norm: normalizeTag("Islands"), display: "Islands" }
+  ];
+
+  const merged = new Map();
+  quickFilters.forEach((t) => merged.set(t.norm, t.display));
+  getAllTags(activeBooks).forEach((t) => merged.set(t.norm, t.display));
+
+  const filterList = Array.from(merged.entries()).map(([norm, display]) => ({ norm, display }));
+
+  function paintFilters() {
+    if (!filtersEl) return;
+
+    filtersEl.innerHTML = filterList
+      .map((t) => {
+        const isActive = t.norm === activeTag;
+        return `<button type="button" class="filter-btn${isActive ? " is-active" : ""}" data-tag="${t.norm}" aria-pressed="${isActive}">${t.display}</button>`;
+      })
+      .join("");
+  }
+
+  function paintGrid() {
+    const q = (searchQ || "").trim().toLowerCase();
+    const filtered = activeBooks.filter((b) => matchesTag(b, activeTag) && matchesSearch(b, q));
+
+    container.innerHTML = filtered
+      .map((book) => renderBookCard(book, { featured: false }))
+      .join("");
+
+    if (filtered.length === 0) {
+      container.innerHTML = `<div class="empty-state">No books match your filter/search.</div>`;
+    }
+  }
+
+  // Initial render
+  paintFilters();
+  paintGrid();
+
+  // Events (bind once per page render)
+  if (filtersEl) {
+    // Prevent duplicate handlers if renderAllBooks is called more than once
+    filtersEl.dataset.bound = filtersEl.dataset.bound || "";
+    if (filtersEl.dataset.bound !== "true") {
+      filtersEl.addEventListener("click", (e) => {
+        const btn = e.target.closest("button[data-tag]");
+        if (!btn) return;
+        activeTag = btn.getAttribute("data-tag") || "all";
+        paintFilters();
+        paintGrid();
+      });
+      filtersEl.dataset.bound = "true";
+    }
+  }
+
+  if (searchEl) {
+    searchEl.dataset.bound = searchEl.dataset.bound || "";
+    if (searchEl.dataset.bound !== "true") {
+      searchEl.addEventListener("input", (e) => {
+        searchQ = e.target.value || "";
+        paintGrid();
+      });
+      searchEl.dataset.bound = "true";
+    }
+  }
 }
 
 // Floating WhatsApp button
@@ -371,8 +495,8 @@ function setupInstagramLinks() {
   });
 }
 
-// Instagram links (header/footer)
-function setupInstagramLinks() {
+// Facebook links (header/footer)
+function setupFacebookLinks() {
   if (!SITE_CONFIG.facebookUrl) return;
   const links = document.querySelectorAll('[data-facebook-link="true"]');
   links.forEach((el) => {
@@ -420,6 +544,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // Header/footer Instagram links
   if (typeof setupInstagramLinks === "function") {
     setupInstagramLinks();
+  }
+
+  // Header/footer Facebook links (if used)
+  if (typeof setupFacebookLinks === "function") {
+    setupFacebookLinks();
   }
 
   if (typeof injectAuthorStructuredData === "function") {

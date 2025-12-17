@@ -43,8 +43,20 @@
   <main>
     <section class="section">
       <div class="section-header">
-        <h2>All Books</h2>
-        <p>Browse the full catalog. Click “Order via WhatsApp” to place an order.</p>
+        <h1>All Books by Gopal Bodhe</h1>
+        <p>Browse the full catalog. Filter by theme or search by title/topic. Click “Order via WhatsApp” to place an order.</p>
+
+        <!-- Catalog controls (client-side only) -->
+        <div class="catalog-controls" aria-label="Catalog filters and search">
+          <div id="book-filters" class="book-filters" role="group" aria-label="Filter books by topic">
+            <!-- Filled by JS -->
+          </div>
+
+          <div class="book-search">
+            <label class="sr-only" for="book-search-input">Search books</label>
+            <input id="book-search-input" type="search" placeholder="Search by title or topic…" autocomplete="off" />
+          </div>
+        </div>
       </div>
       <div id="all-books">
         <!-- Filled by JS -->
