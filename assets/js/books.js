@@ -216,6 +216,28 @@ const BOOKS = [
     externalPurchaseLink: "",
     whatsappMessageTemplate:
       "Namaste, I am interested in buying \"Sidhivinayak Book\" by Shri Gopal Bodhe. Please share payment and shipping details."
+  },
+  {
+    id: 9,
+    title: "New Book",
+    slug: "sample-book-two",
+    subtitle: "",
+    description:
+      "Another placeholder entry. Add the real book name, theme, and a short blurb here.",
+    coverImage: "assets/images/books/sidhivinayak.jpg",
+    price: 299,
+    currency: DEFAULT_CURRENCY,
+    isbn: "",
+    publisher: "",
+    publicationYear: 2020,
+    pages: 180,
+    language: "Marathi",
+    format: "Paperback",
+    tags: ["sample"],
+    isActive: true,
+    externalPurchaseLink: "",
+    whatsappMessageTemplate:
+      "Namaste, I am interested in buying \"Sidhivinayak Book\" by Shri Gopal Bodhe. Please share payment and shipping details."
   }
   // TODO: Add real books 3–9 here following the same structure
 ];
