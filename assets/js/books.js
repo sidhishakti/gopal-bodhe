@@ -3,14 +3,13 @@
 // ====== GLOBAL CONFIG ======
 const SITE_CONFIG = {
   // NOTE: WhatsApp format should ideally be country-code + number with NO '+' for wa.me.
-  // If your current value works for you, you can keep it, but recommended: "96877248284"
   whatsappNumber: "+919930027257",
 
   // Default currency used when book.currency is missing
   defaultCurrency: "INR",
 
   // Instagram profile URL
-  instagramUrl: "https://www.instagram.com/siddhishakti_publication?igsh=cmhoY3MxdGtxMmJh",
+  instagramUrl: "https://www.instagram.com/siddhishakti_publication",
 
   // Facebook page URL
   facebookUrl: "https://www.facebook.com/Siddhishaktipublication"
@@ -198,28 +197,6 @@ const BOOKS = [
   {
     id: 8,
     title: "Sidhivinayak",
-    slug: "sample-book-two",
-    subtitle: "",
-    description:
-      "Another placeholder entry. Add the real book name, theme, and a short blurb here.",
-    coverImage: "assets/images/books/sidhivinayak.jpg",
-    price: 299,
-    currency: DEFAULT_CURRENCY,
-    isbn: "",
-    publisher: "",
-    publicationYear: 2020,
-    pages: 180,
-    language: "Marathi",
-    format: "Paperback",
-    tags: ["sample"],
-    isActive: true,
-    externalPurchaseLink: "",
-    whatsappMessageTemplate:
-      "Namaste, I am interested in buying \"Sidhivinayak Book\" by Shri Gopal Bodhe. Please share payment and shipping details."
-  },
-  {
-    id: 9,
-    title: "New Book",
     slug: "sample-book-two",
     subtitle: "",
     description:
