@@ -23,6 +23,21 @@ designed to be hosted on **GitHub Pages**.
 
 4. Commit and push to GitHub, then enable GitHub Pages from the repository settings.
 
+## Seminar / event advertisements (announcement bar)
+
+The site includes a clean, dismissible announcement bar for promoting seminars and events.
+
+Edit `assets/js/ads.js`:
+
+- Set `enabled: true`
+- Update `startDate` / `endDate` (YYYY-MM-DD)
+- Update `message`, `meta`, `ctaText`, and `ctaHref`
+
+`ctaHref` can be:
+- `#contact` → scrolls to the contact section
+- `#whatsapp` → builds a WhatsApp registration link automatically
+- Any full URL (Google Form, payment link, etc.)
+
 ## WhatsApp ordering
 
 The site uses WhatsApp click-to-chat links to capture orders with pre-filled
