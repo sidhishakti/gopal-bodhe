@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://USERNAME.github.io/gopal-bodhe-site/sitemap.xml
+Sitemap: https://sidhishakti.github.io/gopal-bodhe-site/sitemap.xml
