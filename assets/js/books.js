@@ -12,7 +12,10 @@ const SITE_CONFIG = {
   instagramUrl: "https://www.instagram.com/siddhishakti_publication",
 
   // Facebook page URL
-  facebookUrl: "https://www.facebook.com/Siddhishaktipublication"
+  facebookUrl: "https://www.facebook.com/Siddhishaktipublication",
+
+  // YouTube channel URL
+  youtubeUrl: "https://www.youtube.com/@SiddhiShaktiPublication"
 };
 
 
@@ -462,6 +465,7 @@ function setupFloatingSocialIcons() {
   const whatsappBtn = document.getElementById("floating-whatsapp");
   const instagramBtn = document.getElementById("floating-instagram");
   const facebookBtn = document.getElementById("floating-facebook");
+  const youtubeBtn = document.getElementById("floating-youtube");
 
   // WhatsApp
   if (whatsappBtn && typeof getGlobalWhatsAppLink === "function") {
@@ -476,6 +480,11 @@ function setupFloatingSocialIcons() {
   // Facebook
   if (facebookBtn && SITE_CONFIG.facebookUrl) {
     facebookBtn.href = SITE_CONFIG.facebookUrl;
+  }
+
+  // YouTube
+  if (youtubeBtn && SITE_CONFIG.youtubeUrl) {
+    youtubeBtn.href = SITE_CONFIG.youtubeUrl;
   }
 }
 
