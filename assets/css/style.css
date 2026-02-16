@@ -387,54 +387,58 @@ main {
 } */
 
 /* Floating social icons: WhatsApp, Instagram, Facebook */
-.floating-social {
+.floating-socials {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  right: 16px;
+  bottom: 16px;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  z-index: 50;
+  gap: 12px;
+  z-index: 999;
 }
 
-.floating-social__btn {
-  width: 52px;
-  height: 52px;
-  border-radius: 999px;
-  display: inline-flex;
+.floating-social-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
   align-items: center;
   justify-content: center;
+  color: #fff;
   text-decoration: none;
-  box-shadow: 0 10px 15px rgba(15, 23, 42, 0.3);
-  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* Brand-ish colors */
-.floating-social__btn--whatsapp {
-  background: #25d366;
+.floating-whatsapp {
+  background: #25D366;
 }
 
-.floating-social__btn--instagram {
-  background: #000000;
+.floating-instagram {
+  background: #000;
 }
 
-.floating-social__btn--facebook {
-  background: #1877f2;
+.floating-facebook {
+  background: #1877F2;
 }
 
-.floating-social__btn svg {
+.floating-youtube {
+  background: #FF0000;
+}
+
+.social-icon {
   width: 26px;
   height: 26px;
+  display: block;
 }
 
-.floating-social__btn:hover {
+.floating-social-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 14px 25px rgba(15, 23, 42, 0.35);
 }
 
 /* On very small screens, line them up horizontally */
 @media (max-width: 480px) {
-  .floating-social {
+  .floating-socials {
     flex-direction: row;
     bottom: 16px;
     right: 16px;
@@ -646,10 +650,43 @@ main {
     flex-direction: column;
     align-items: stretch;
   }
+
   .announce-actions {
     justify-content: space-between;
   }
+
   .announce-cta {
     width: 100%;
   }
+}
+
+.youtube-section {
+  padding: 3rem 1rem;
+  background: #fff;
+  text-align: center;
+}
+
+.youtube-section h2 {
+  margin-bottom: 0.5rem;
+}
+
+.youtube-section p {
+  color: #555;
+  margin-bottom: 1.25rem;
+}
+
+.youtube-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background: #ff0000;
+  color: #fff;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.youtube-cta:hover {
+  background: #cc0000;
 }
